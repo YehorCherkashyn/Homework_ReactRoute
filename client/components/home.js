@@ -1,24 +1,52 @@
-import React from 'react'
-// eslint-disable-next-line no-unused-vars
-import { Switch, Route } from 'react-router-dom'
+/* eslint-disable no-return-await */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Switch, Route, useParams } from 'react-router-dom'
 import Header from './header'
 
-import Dashboard from './dashboard'
-import Main from './main'
-import Profile from './profile'
+import InputView from './input'
+import Repo from './repo'
+import Description from './description'
 
 const Home = () => {
+  const { username, reponame } = useParams()
+  const [repo, setRepo] = useState([])
+  const [project, setProject] = useState()
+
+   useEffect(() => {
+    axios.get(`https://api.github.com/users/${username}/repos`).then(
+      (res) => {
+        setRepo(res.data)
+      },
+    )
+    return () => {}
+  }, [username])
+  
+  
+  useEffect(() => {
+    axios
+      .get(`https://raw.githubusercontent.com/${username}/${reponame}/master/README.md`)
+      .then((res) => {
+        setProject(res.data)
+      })
+  }, [username, reponame])
+
   return (
     <div>
-      <Header />
-      <div className="flex items-center justify-center h-screen">
-        <div className="bg-indigo-800 text-white font-bold rounded-lg border shadow-lg p-10">
-          <Switch>
-            <Route exact path="/dashboard" component={() => <Dashboard />} />
-            <Route exact path="/dashboard/main" component={() => <Main />} />
-            <Route exact path="/dashboard/profile/:user" component={() => <Profile />} />
-          </Switch>
-        </div>
+      <div> {username && <Header />} </div>
+      <div> 
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={() => <InputView />}
+          />
+          <Route exact path="/:username" component={() => <Repo repo={repo} />} />
+          <Route exact path="/:username/:reponame" component={() => <Description project={project} />} />
+        </Switch> 
       </div>
     </div>
   )
