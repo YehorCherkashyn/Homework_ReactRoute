@@ -1,17 +1,14 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
-import Head from './head'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Repo = (props) => {
-  const { username } = useParams()
   return (
     <div>
       <div>
         {props.repo.map(it => {
-        return <div key={it.id}> <Link to={`/${username}/${it.name}`}> {it.name} </Link> </div>     
+        return <div key={it.id}> <Link to={`/${props.username}/${it.name}`}> {it.name} </Link> </div>     
       })} 
       </div>
     </div>

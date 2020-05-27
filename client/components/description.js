@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import Head from './head'

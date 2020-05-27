@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div>
-      <div> {username && <Header />} </div>
+      <div> {username && <Header username={username} />} </div>
       <div> 
         <Switch>
           <Route
@@ -44,7 +44,7 @@ const Home = () => {
             path="/"
             component={() => <InputView />}
           />
-          <Route exact path="/:username" component={() => <Repo repo={repo} />} />
+          <Route exact path="/:username" component={() => <Repo username={username} repo={repo} />} />
           <Route exact path="/:username/:reponame" component={() => <Description project={project} />} />
         </Switch> 
       </div>

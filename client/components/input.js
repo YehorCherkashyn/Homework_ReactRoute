@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { history } from '../redux'
 
-const InputView = (props) => {
+const InputView = () => {
   const [user, setUser] = useState('')
   const onChange = (e) => {
     const newUser = e.target.value

@@ -1,18 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Header = () => {
-  const { username, repo } = useParams()
+const Header = (props) => {
   return (
     <div>
-      <div id="repository-name"> {username} </div>
+      <div id="repository-name"> {props.username} </div>
       <Link id="go-back" to="/">
         {' '}
         Back to search{' '}
       </Link>
       <div>
-        <Link id="go-repository-list" to={`/${username}`}>
+        <Link id="go-repository-list" to={`/${props.username}`}>
           {' '}
           Back to repository list{' '}
         </Link>
