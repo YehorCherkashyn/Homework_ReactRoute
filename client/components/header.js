@@ -1,21 +1,33 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-const Header = (props) => {
+const Header = () => {
+  const { username, reponame } = useParams()
+  if (username && reponame) {
+    return (
+      <div>
+        <div id="repository-name"> {username} </div>
+        <Link id="go-back" to="/">
+          {' '}
+          Back to search{' '}
+        </Link>
+        <div>
+          <Link id="go-repository-list" to={`/${username}`}>
+            {' '}
+            Back to repository list{' '}
+          </Link>
+        </div>
+      </div>
+    )
+  }
   return (
     <div>
-      <div id="repository-name"> {props.username} </div>
+      <div id="repository-name"> {username} </div>
       <Link id="go-back" to="/">
         {' '}
         Back to search{' '}
       </Link>
-      <div>
-        <Link id="go-repository-list" to={`/${props.username}`}>
-          {' '}
-          Back to repository list{' '}
-        </Link>
-      </div>
     </div>
   )
 }

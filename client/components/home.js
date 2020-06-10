@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div>
-      <div> {username && <Header username={username} />} </div>
+      <div> {username && <Header />} </div>
       <div> 
         <Switch>
           <Route
